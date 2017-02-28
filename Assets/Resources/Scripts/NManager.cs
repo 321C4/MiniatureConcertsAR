@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NManager : Photon.MonoBehaviour {
-	public GameObject headPrefab;
-	public GameObject leftHandPrefab;
-	public GameObject rightHandPrefab;
+	public GameObject ARhead;
 
 	public byte Version = 1;
 
@@ -13,6 +11,7 @@ public class NManager : Photon.MonoBehaviour {
 	{
 		//connect to Version 1 room
 		PhotonNetwork.ConnectUsingSettings(1 + "." + SceneManagerHelper.ActiveSceneBuildIndex);
+		var temp = PhotonVoiceNetwork.Client;
 
 	}
 	
@@ -48,9 +47,7 @@ public class NManager : Photon.MonoBehaviour {
 	public void OnJoinedRoom()
 	{
 		Debug.Log("OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage");
-		//instantiate prefabs for head and hands across the network!
-		//PhotonNetwork.Instantiate (headPrefab.name, VRManager.Instance.head.transform.position, VRManager.Instance.head.transform.rotation, 0);
-		//PhotonNetwork.Instantiate (leftHandPrefab.name, VRManager.Instance.leftHand.transform.position, VRManager.Instance.leftHand.transform.rotation, 0);
-		//PhotonNetwork.Instantiate (rightHandPrefab.name, VRManager.Instance.rightHand.transform.position, VRManager.Instance.rightHand.transform.rotation, 0);
+		//instantiate prefab for AR avatar across the network!
+		PhotonNetwork.Instantiate (ARhead.name, ARManager.Instance.ARhead.transform.position, ARManager.Instance.ARhead.transform.rotation, 0);
 	}
 }
